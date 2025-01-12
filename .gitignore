@@ -1,0 +1,20 @@
+.vercel
+.env
+# Node.js
+node_modules/
+
+# Backend
+server/.env
+server/node_modules/
+
+# Frontend
+client/node_modules/
+client/.env
+
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
