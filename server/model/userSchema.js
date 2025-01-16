@@ -25,7 +25,20 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    incognitoMode: { 
+        type: Boolean, 
+        default: false 
+    },
+    gamification: {
+        points: { type: Number, default: 0 },
+        level: { type: Number, default: 1 },
+        achievements: [String]
+    },
+    selfDestructTimer: { 
+        type: Number, 
+        default: 0
+    } 
 });
 
 module.exports = mongoose.model('User', userSchema);
