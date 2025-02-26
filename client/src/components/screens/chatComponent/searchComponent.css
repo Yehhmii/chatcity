@@ -1,0 +1,145 @@
+.search-component {
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+.search-component .form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-component input {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-component input:focus {
+  border-color: #007bff;
+}
+
+.search-component button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.3s ease;
+}
+
+.search-component button:hover {
+  background-color: #0056b3;
+}
+
+.search-component .error {
+  color: #ff3333;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.search-component .no-results {
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.search-component ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-component li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.search-component li:hover {
+  background-color: #f8f8f8;
+}
+
+.search-component .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-component .user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #007bff;
+}
+
+.search-component .placeholder-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.search-component li button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-component li button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.search-component li button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+/* Toast styles */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: fadeInOut 3s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}

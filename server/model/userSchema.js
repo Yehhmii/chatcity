@@ -38,7 +38,13 @@ const userSchema = new mongoose.Schema({
     selfDestructTimer: { 
         type: Number, 
         default: 0
-    } 
+    } ,
+     // fields for friend system:
+    friendRequests: {
+        incoming: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        outgoing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
 module.exports = mongoose.model('User', userSchema);

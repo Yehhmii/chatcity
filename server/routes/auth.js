@@ -11,9 +11,5 @@ router.post('/login', loginUser);
 // Logout route
 router.post('/logout', checkBlacklist, logoutUser);
 
-// Example protected route
-router.get('/protected', checkBlacklist, (req, res) => {
-    res.status(200).json({ message: 'This is a protected route!' });
-});
 
 module.exports = router;

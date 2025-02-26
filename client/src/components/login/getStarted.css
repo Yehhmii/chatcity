@@ -1,0 +1,214 @@
+.getStartedContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.clipside{
+     clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+     background-image: url('../../images/onboard2.jpg');
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     width: 100%;
+     display: grid;
+     grid-template-rows: 1.5fr 1fr;
+     z-index: 1;
+}
+.clipesideImg img{
+    width: 200px;
+    border-bottom-right-radius: 20%;
+    border-bottom-left-radius: 20%;
+}
+.rectangledummy{
+    width: 50%;
+    margin-left: 110px;
+}
+.rectangledummy img{
+    width: 100%;
+}
+.buttomdummy{
+    display: flex;
+    gap: 70px;
+}
+
+
+
+
+.textCardcon{
+    width: 50%;
+    /* height: 300px; */
+    background: #ffffff;
+    margin-left: 200px;
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.textCardcon:hover{
+    transform: scale(1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+.textCardcon img{
+    width: 70%;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 15%;
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+}
+.typingDiv{
+    margin-top: 20px;
+    height: 50px;
+}
+.btnTypingCon{
+    margin-top: 13%;
+    margin-left: 35%;
+
+}
+
+
+
+.loginDiv{
+    margin-left: -200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #04066d;
+    position: relative;
+    /* width: 600px; */
+  }
+  
+  .get-started-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #ff3737;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .get-started-btn:hover {
+    transform: scale(1.1);
+    background-color: #007bff;
+  }
+  
+  .card-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .signup-success-card {
+    background-color: #d4edda;  /* light green background */
+    color: #155724;             /* dark green text */
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+
+
+@media screen and (max-width: 1150px) {
+    .getStartedContainer{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        background: #04066d;
+    }
+    .clipside{
+        clip-path: polygon(0% 0%, 100% 0, 100% 74%, 49% 100%, 0 74%);
+    }
+    .buttomdummy{
+        justify-content: space-between;
+        gap: 0;
+    }
+    .buttomdummy img{
+        width: 300px;
+    }
+    .textCardcon{
+        margin-left: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .rectangledummy{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        margin-left: 0;
+    }
+
+    .loginDiv{
+        margin-left: 0;
+        padding: 250px;
+    }
+    .card-wrapper{
+        margin-left: -100px;
+    }
+}
+
+@media screen and (max-width: 890px) {
+    .rectangledummy{
+        width: 50%;
+    }
+    .buttomdummy img{
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 598px) {
+    .rectangledummy{
+        width: 50%;
+    }
+    .buttomdummy img{
+        width: 150px;
+    }
+    .textCardcon{
+        margin-top: -40px;
+        height: 300px;
+    }
+    
+}
+@media screen and (max-width: 550px) {
+    .loginDiv {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    .get-started-btn{
+        font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 450px) {
+    .rectangledummy{
+        width: 40%;
+    }
+    .buttomdummy img{
+        width: 100px;
+    }
+    .textCardcon{
+        margin-top: -60px;
+        height: 250px;
+    }
+}
+@media screen and (max-width: 450px) {
+
+}

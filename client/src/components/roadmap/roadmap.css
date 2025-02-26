@@ -1,0 +1,107 @@
+/* Main container */
+.roadmap-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Side image container */
+  .side-image {
+    width: 200px;
+    height: 100%;
+    flex-shrink: 0; /* Prevent resizing */
+  }
+  
+  .side-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fits nicely */
+  }
+  
+  /* Roadmap content */
+  .roadmap-content {
+    flex-grow: 1; /* Take up the remaining space */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Wrapper for links */
+  .link-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Game-like links */
+  .game-link {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background: linear-gradient(145deg, #3a86ff, #8338ec);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), inset 0 -4px 10px rgba(255, 255, 255, 0.1);
+    transform: translateZ(0);
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 2;
+  }
+  
+  /* Pop and bounce effect */
+  .game-link:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), inset 0 -5px 15px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Add slight bouncing animation */
+  .game-link {
+    animation: bounce 2s infinite ease-in-out;
+  }
+  
+  /* Bounce animation */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* App logo for small screens */
+  .game-logo {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: auto;
+  }
+  
+  .game-logo img {
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  /* Media query for screens below 600px */
+  @media screen and (max-width: 600px) {
+    .side-image {
+      display: none;
+    }
+  
+    .game-link {
+      font-size: 1.2rem;
+      padding: 8px 16px;
+    }
+  }
+  

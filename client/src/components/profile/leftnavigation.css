@@ -1,0 +1,80 @@
+/* Left Navigation Panel */
+.navItems {
+    width: 80px; /* Smallest column */
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.top-icons,
+.bottom-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.top-icons{
+    margin-top: 30px;
+}
+.bottom-icons{
+    margin-bottom: 30px;
+}
+
+/* Icon container for individual icons */
+.icon-container {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Individual icon style */
+.nav-icon {
+    color: #adadad;
+    font-size: 1.3rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect on the icon container */
+.icon-container:hover .nav-icon {
+    transform: scale(1.1);
+    color: #04066d;
+}
+
+/* Active icon styling */
+.icon-container.active .nav-icon {
+    color: #04066d;
+}
+
+.icon-container.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid #04066d;
+    border-radius: 50%;
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.icon-container:hover .tooltip {
+    opacity: 1;
+}

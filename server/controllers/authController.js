@@ -3,16 +3,15 @@ const jwt = require('jsonwebtoken');
 const redis = require('redis');
 const User = require('../model/userSchema');
 
-// Create Redis client
-const client = redis.createClient();
-
-client.on('connect', () => {
-    console.log('Redis client connected.');
+// Initialize Redis Client
+const client = redis.createClient({
+    url: 'redis://127.0.0.1:6379', // Connect to local Redis server
 });
 
-client.on('error', (err) => {
-    console.error('Redis connection error:', err);
-});
+client.connect() // Ensure connection is established
+    .then(() => console.log('Redis client connected.'))
+    .catch((err) => console.error('Redis connection error:', err));
+
 
 // Register User
 const registerUser = async (req, res) => {
@@ -57,7 +56,7 @@ const loginUser = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        res.status(200).json({ message: 'Login successful!', token });
+        res.status(200).json({ message: 'Login successful!', token, user });
     } catch (err) {
         console.error('Error during login:', err);
         res.status(500).json({ error: 'Failed to login.' });
@@ -65,46 +64,59 @@ const loginUser = async (req, res) => {
 };
 
 // Logout User
-const logoutUser = (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-        return res.status(400).json({ error: 'Token is required for logout.' });
-    }
-
-    const decoded = jwt.decode(token);
-    if (!decoded) {
-        return res.status(400).json({ error: 'Invalid token.' });
-    }
-
-    const expiresIn = decoded.exp * 1000 - Date.now();
-
-    client.setEx(`blacklist:${token}`, Math.floor(expiresIn / 1000), token, (err) => {
-        if (err) {
-            console.error('Redis error during logout:', err);
-            return res.status(500).json({ error: 'Failed to blacklist token.' });
+const logoutUser = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) {
+            console.error('No token provided');
+            return res.status(400).json({ error: 'Token is required for logout.' });
         }
-        res.status(200).json({ message: 'Logout successful!' });
-    });
+
+        const decoded = jwt.decode(token);
+        if (!decoded) {
+            console.error('Invalid token provided');
+            return res.status(400).json({ error: 'Invalid token.' });
+        }
+
+        const expiresIn = decoded.exp * 1000 - Date.now(); // Remaining time in ms
+        if (expiresIn <= 0) {
+            console.error('Token has already expired');
+            return res.status(400).json({ error: 'Token has already expired.' });
+        }
+
+        console.log(`Blacklisting token with TTL: ${Math.floor(expiresIn / 1000)} seconds`);
+
+        // Check if Redis client is connected
+        if (client.isOpen) {
+            await client.setEx(`blacklist:${token}`, Math.floor(expiresIn / 1000), token);
+            return res.status(200).json({ message: 'Logout successful!' });
+        } else {
+            console.error('Redis client is not connected');
+            return res.status(500).json({ error: 'Redis client is not connected.' });
+        }
+    } catch (err) {
+        console.error('Error during logout:', err);
+        return res.status(500).json({ error: 'An error occurred during logout.' });
+    }
 };
 
 // Middleware to Check Blacklisted Tokens
-const checkBlacklist = (req, res, next) => {
+const checkBlacklist = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
         return res.status(401).json({ error: 'Unauthorized.' });
     }
 
-    client.get(`blacklist:${token}`, (err, data) => {
-        if (err) {
-            console.error('Redis error during blacklist check:', err);
-            return res.status(500).json({ error: 'Redis error.' });
-        }
+    try {
+        const data = await client.get(`blacklist:${token}`);
         if (data) {
             return res.status(401).json({ error: 'Token is blacklisted.' });
         }
-
         next();
-    });
+    } catch (err) {
+        console.error('Redis error during blacklist check:', err);
+        return res.status(500).json({ error: 'Redis error.' });
+    }
 };
 
 module.exports = { registerUser, loginUser, logoutUser, checkBlacklist };
